@@ -1,0 +1,12 @@
+.posts {
+    display: flex;
+}
+
+.item {
+    display: block;
+}
+
+.itemImg {
+    width: 112.5px;
+    height: 112.5px;
+}

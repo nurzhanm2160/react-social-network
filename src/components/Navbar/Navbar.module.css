@@ -1,0 +1,25 @@
+/* Navbar styles */
+.nav {
+    grid-area: nav;
+}
+
+.nav ul {
+    list-style-type: none;
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 20px;
+}
+
+
+@media (max-width: 600px) {
+    .nav {
+        margin: 0 auto;
+    }
+
+    .nav ul{
+        display: inline-block;
+        justify-content: space-between;
+    }
+}
