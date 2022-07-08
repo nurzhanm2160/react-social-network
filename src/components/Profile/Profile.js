@@ -4,8 +4,28 @@ import style from './Profile.module.css'
 import Post from "./Post/Post";
 import UserDescription from "./UserInformation/UserDescription/UserDescription";
 import UserContactLinks from "./UserInformation/UserContactLinks/UserContactLinks";
+import {useDispatch, useSelector} from "react-redux";
+import {addPostAC, updateNewPostTextAC} from "../../redux/profileReducer";
+
 
 const Profile = () => {
+    let inputRef = React.createRef()
+
+    let postInputMessage = useSelector(state => state.profileReducer.postInputMessage)
+    let posts = useSelector(state => state.profileReducer.posts)
+
+    const dispatch = useDispatch();
+
+    let addNewPost = () => {
+        dispatch(addPostAC())
+        dispatch(updateNewPostTextAC(''))
+    }
+
+    let onChangeInput = () => {
+        let text = inputRef.current.value
+        dispatch(updateNewPostTextAC(text))
+    }
+
     return (
         <>
             <div>
@@ -18,15 +38,13 @@ const Profile = () => {
 
             <div>
                 <label>Input your post: </label>
-                <input type="text"/>
-                <button>add post</button>
+                <textarea value={postInputMessage} onChange={onChangeInput} ref={inputRef} type="text"/>
+                <button onClick={addNewPost}>add post</button>
             </div>
 
-
-            <Post message={"First post"} username={"nurik2160"} />
-            <Post message={"Second post"} username={"dauren"} />
-            <Post message={"Third post"} username={"kusaiyn"} />
-
+            {posts.map(({message, username}, index) => {
+                return <Post message={message} username={username} key={index}/>
+            })}
         </>
     );
 };
